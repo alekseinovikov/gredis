@@ -1,8 +1,12 @@
 package main
 
 import (
+	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
-	"fyne.io/fyne/v2/widget"
+	"fyne.io/fyne/v2/canvas"
+	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/layout"
+	"image/color"
 )
 
 func Sum(a int, b int) int {
@@ -10,10 +14,16 @@ func Sum(a int, b int) int {
 }
 
 func main() {
-	app := app.New()
+	myApp := app.New()
+	myWindow := myApp.NewWindow("Container")
+	green := color.NRGBA{R: 0, G: 180, B: 0, A: 255}
 
-	w := app.NewWindow("Hello")
-	w.SetContent(widget.NewLabel("Hello Fyne!"))
+	text1 := canvas.NewText("Hello", green)
+	text2 := canvas.NewText("There", green)
+	text2.Move(fyne.NewPos(20, 20))
+	//content := container.NewWithoutLayout(text1, text2)
+	content := container.New(layout.NewGridLayout(6), text1, text2)
 
-	w.ShowAndRun()
+	myWindow.SetContent(content)
+	myWindow.ShowAndRun()
 }
