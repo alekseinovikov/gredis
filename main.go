@@ -4,8 +4,6 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/canvas"
-	"fyne.io/fyne/v2/container"
-	"fyne.io/fyne/v2/layout"
 	"image/color"
 )
 
@@ -15,15 +13,12 @@ func Sum(a int, b int) int {
 
 func main() {
 	myApp := app.New()
-	myWindow := myApp.NewWindow("Container")
-	green := color.NRGBA{R: 0, G: 180, B: 0, A: 255}
+	w := myApp.NewWindow("Gradient")
 
-	text1 := canvas.NewText("Hello", green)
-	text2 := canvas.NewText("There", green)
-	text2.Move(fyne.NewPos(20, 20))
-	//content := container.NewWithoutLayout(text1, text2)
-	content := container.New(layout.NewGridLayout(6), text1, text2)
+	//gradient := canvas.NewHorizontalGradient(color.White, color.Transparent)
+	gradient := canvas.NewRadialGradient(color.White, color.Transparent)
+	w.SetContent(gradient)
 
-	myWindow.SetContent(content)
-	myWindow.ShowAndRun()
+	w.Resize(fyne.NewSize(100, 100))
+	w.ShowAndRun()
 }
